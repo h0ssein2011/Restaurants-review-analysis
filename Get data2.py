@@ -1,12 +1,13 @@
 import requests
+from bs4 import BeautifulSoup
+
 # Set headers
 headers = requests.utils.default_headers()
 headers.update({ 'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0'})
 
 
-from bs4 import BeautifulSoup
 
-url = "https://snappfood.ir/restaurant/city/Tehran/near/275?lat=35.698066949844&long=51.372826695442&services=RESTAURANT"
+url = "https://snappfood.ir/restaurant/city/"
 req = requests.get(url, headers)
 soup = BeautifulSoup(req.content, 'html.parser')
 # print(soup.prettify())

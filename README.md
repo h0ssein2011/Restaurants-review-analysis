@@ -1,6 +1,6 @@
 
 ###  A new project to get food order data and do analysis.
-Agend:
+Agenda:
 
 --get data by web scrapping
 

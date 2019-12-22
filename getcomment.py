@@ -12,7 +12,7 @@ nazar_number=re_count.get_text()
 nazar_number=nazar_number.replace(' ','')
 nazar_number=nazar_number.replace('تعدادنظرات:','')
 s=int(nazar_number)
-
+comments=[]
 for i in range(s):
     comments.append(comment[i].get_text())
 comments

@@ -7,7 +7,7 @@ comment_body = soup.find(class_='tab review-paginate')
 comment=comment_body.find_all(class_='text-limitation show all mobile-hd')
 #number of comment 
 reviewlist=soup.find(id='review-list')
-re_count=re.find(class_='reviews-count')
+re_count=reviewlist.find(class_='reviews-count')
 nazar_number=re_count.get_text()
 nazar_number=nazar_number.replace(' ','')
 nazar_number=nazar_number.replace('تعدادنظرات:','')

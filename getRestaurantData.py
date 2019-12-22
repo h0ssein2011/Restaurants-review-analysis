@@ -71,4 +71,3 @@ for i in range(1000):
 		code = i.split('/')[3]
 		getRestaurantInfo(code)
 		
-

@@ -1,4 +1,4 @@
-### Scrapping restaurants review's And deploy NLP on customer comments in Persian(Farsi)
+### Scrapping restaurant's review And deploy NLP on customer comments in Persian(Farsi)
 
 We want to deploy this image as an example in each restaurant's profile as our service by categorizing comments
 

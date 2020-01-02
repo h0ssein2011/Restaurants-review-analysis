@@ -36,21 +36,30 @@ def postagger(comment):
 for i in range(len(comments)):
     comments[i]=normalize(comments[i])
     pos_comments.append(postagger(comments[i]))
-    
-for i in range(len(pos_comments)): #sentece tokenize by Verbs label 
+
+for i in range(len(pos_comments)): #sentence tokenize by V and aj label  
     a=0
+    flag=False
     for j in range(len(pos_comments[i])):
         if pos_comments[i][j][1]=='V':
             s=''
             for k in range(a,j+1):
-                s=s+' '+pos_comments[i][k][0]
+                if pos_comments[i][k][1]=='AJ':
+                    flag=True
+                    break    
+            if flag==True:
+                for k in range(a,j+1):
+                    s=s+' '+pos_comments[i][k][0]
+                flag=False
             sent.append(s)    
             a=j+1
-
+            
+            
 for i in range(len(sent)): #search the aspects in sentences. 
     for j in range(len(aspects)):
         s=' '+aspects[j]+' '
         if re.search(s, sent[i]):
             sent_aspect.append(sent[i])
             break
+
 len(sent_aspect)

@@ -7,8 +7,6 @@ import csv
 comments=[]
 pos_comments=[]
 sent=[]
-sent_aspect=[]
-
 remove_digits = True
 pattern = r'[^الف-ی آ-ی0-9\s]' if not remove_digits else r'[^الف-یآ-ی\s]'
 
@@ -54,12 +52,41 @@ for i in range(len(pos_comments)): #sentence tokenize by V and aj label
             sent.append(s)    
             a=j+1
             
-            
-for i in range(len(sent)): #search the aspects in sentences. 
+def aspect_search(sent):
+    #search the aspects in sentences.
     for j in range(len(aspects)):
         s=' '+aspects[j]+' '
-        if re.search(s, sent[i]):
-            sent_aspect.append(sent[i])
+        if re.search(s, sent):
+            sent_aspect.append(sent)
             break
+sent_aspect=[]
+for i in range(len(sent)):
+    aspect_search(sent[i])
+    
+# sent_aspect is first output.
 
-len(sent_aspect)
+#........
+#aj = صفت
+#adv = قید
+pos_aspect=[]
+for i in sent_aspect:
+    pos_aspect.append(postagger(i))
+all_terms=[]
+for i in range(len(pos_aspect)):
+    for j in range(len(pos_aspect[i])):
+        if (pos_aspect[i][j][1]=='AJ' and pos_aspect[i][j-1][1]=='N'  and pos_aspect[i][j+1][1]=='V') or (pos_aspect[i][j][1]=='AJ' and pos_aspect[i][j-2][1]=='N' and pos_aspect[i][j-1][1]=='ADV' and pos_aspect[i][j+1][1]=='V'):
+            s=''
+            for k in range(len(pos_aspect[i])):
+                s=s+' '+pos_aspect[i][k][0]
+            all_terms.append(s)
+            break
+# all_terms is second 
+#.......
+terms=[]
+for i in range(len(pos_aspect)):
+    for j in range(len(pos_aspect[i])):
+        if pos_aspect[i][j][1]=='AJ' and pos_aspect[i][j-1][1]=='N' and pos_aspect[i][j+1][1]=='V':
+            terms.append( pos_aspect[i][j-1][0]+' '+ pos_aspect[i][j][0]+' ' +pos_aspect[i][j+1][0])
+        if (pos_aspect[i][j][1]=='AJ' and pos_aspect[i][j-2][1]=='N' and pos_aspect[i][j-1][1]=='ADV' and pos_aspect[i][j+1][1]=='V'):
+            terms.append(pos_aspect[i][j-2][0]+ ' '+pos_aspect[i][j-1][0] +' '+pos_aspect[i][j][0] +' '+ pos_aspect[i][j+1][0])
+# terms is third        
